@@ -7,20 +7,14 @@ export default function Cards({ decks, game, updateGame }) {
   return (
     <Styled.List>
       {
-        decks.map(deck => {
-          if (deck.name === game.deck) {
-            return (
-              deck.cards.map((card, index) => {
-                return (
-                  <Card updateGame={updateGame}
-                  game={game}
-                  card={card}
-                  index={index}
-                  key={index} />
-                );
-              })
-            );
-          } return null;
+        decks.filter(deck => deck.name === game.deck)[0].cards.map((card, index) => {
+          return (
+            <Card updateGame={updateGame}
+              game={game}
+              card={card}
+              index={index}
+              key={index} />
+          );
         })
       }
     </Styled.List>

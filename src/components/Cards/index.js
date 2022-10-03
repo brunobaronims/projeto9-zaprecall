@@ -23,9 +23,9 @@ export const PlayIcon = styled.img`
 export const Button = styled.button`
   background-color: ${({ type }) => {
     switch (type) {
-      case 'GREEN_BUTTON':
+      case 'ZAP':
         return 'green';
-      case 'RED_BUTTON':
+      case 'WRONG':
         return 'red';
       default:
         return 'yellow';

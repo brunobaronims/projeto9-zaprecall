@@ -1,8 +1,8 @@
 import * as Styled from './index'
 import { zap_icon, almost_icon, wrong_icon, play_icon, flip_icon } from '../../assets/index'
 
-const buttons = [{ text: 'Não lembrei', type: 'RED_BUTTON' },
-{ text: 'Quase não lembrei', type: 'YELLOW_BUTTON' }, { text: 'Zap!', type: 'GREEN_BUTTON' }];
+const buttons = [{ text: 'Não lembrei', type: 'WRONG' },
+{ text: 'Quase não lembrei', type: 'ALMOST' }, { text: 'Zap!', type: 'ZAP' }];
 
 function getAnswerIcon(index, game) {
   if (game.zap.includes(index))
