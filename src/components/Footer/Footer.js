@@ -13,7 +13,7 @@ function getAnswerIcon(game, answer) {
 function renderText(game, activeDeck) {
   if (game.status !== 'finished')
     return (
-      <Styled.Text>
+      <Styled.Text data-identifier="flashcard-counter">
         {game.answered.length}/{activeDeck.cards.length} CONCLUÍDOS
       </Styled.Text>
     );

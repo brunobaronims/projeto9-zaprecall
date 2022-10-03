@@ -14,6 +14,7 @@ export const Container = styled.footer`
 
 export const Text = styled.p`
   white-space: pre;
+  color: #333333;
 `;
 
 export const Icons = styled.div`

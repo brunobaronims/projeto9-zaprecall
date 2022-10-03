@@ -75,7 +75,7 @@ export const InactiveCard = styled.div`
       case 'almost':
         return '#FF922E';
       default:
-        return 'rgb(10,10,10)';
+        return '#333333';
     }
   }};
   text-decoration: ${({ type }) => {

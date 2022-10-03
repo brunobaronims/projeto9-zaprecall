@@ -12,14 +12,30 @@ function getAnswerIcon(index, game) {
   return wrong_icon;
 };
 
+function buttonIdentifier(type) {
+  switch (type) {
+    case 'WRONG':
+      return 'forgot-btn';
+    case 'ALMOST':
+      return 'almost-forgot-btn';
+    case 'ZAP':
+      return 'zap-btn';
+    default:
+      return '';
+  }
+}
+
 function inactiveCard(game, index, updateGame) {
   return (
-    <Styled.InactiveCard type={checkAnswer(index, game)}>
+    <Styled.InactiveCard data-identifier="flashcard-index-item"
+      type={checkAnswer(index, game)}>
       Pergunta {index + 1}
       {
-        (game.answered.includes(index)) ? <Styled.CardIcon src={getAnswerIcon(index, game)} /> :
+        (game.answered.includes(index)) ? <Styled.CardIcon data-identifier="flashcard-status"
+          src={getAnswerIcon(index, game)} /> :
           <Styled.PlayButton onClick={() => { updateGame({ type: 'CHOOSE_CARD', payload: index }) }}
-            type='button'>
+            type='button'
+            data-identifier="flashcard-show-btn">
             <Styled.PlayIcon src={play_icon} />
           </Styled.PlayButton>
       }
@@ -29,10 +45,11 @@ function inactiveCard(game, index, updateGame) {
 
 function activeCard(card, updateGame) {
   return (
-    <Styled.ActiveCard>
+    <Styled.ActiveCard data-identifier="flashcard-question">
       {card.question}
       <Styled.Container>
-        <Styled.FlipButton onClick={() => { updateGame({ type: 'FLIP_CARD' }) }}>
+        <Styled.FlipButton data-identifier="flashcard-turn-btn"
+          onClick={() => { updateGame({ type: 'FLIP_CARD' }) }}>
           <Styled.FlipIcon src={flip_icon} />
         </Styled.FlipButton>
       </Styled.Container>
@@ -42,7 +59,7 @@ function activeCard(card, updateGame) {
 
 function flippedCard(card, updateGame, index) {
   return (
-    <Styled.ActiveCard>
+    <Styled.ActiveCard data-identifier="flashcard-answer">
       {card.answer}
       <Styled.Buttons>
         {
@@ -50,6 +67,7 @@ function flippedCard(card, updateGame, index) {
             return (
               <Styled.Button key={button.text}
                 type={button.type}
+                data-identifier={buttonIdentifier(button.type)}
                 onClick={() => { updateGame({ type: button.type, payload: [index] }) }}>
                 {button.text}
               </Styled.Button>
@@ -92,7 +110,7 @@ function renderCard(game, index, updateGame, card) {
 
 export default function Card({ game, card, updateGame, index }) {
   return (
-    <Styled.Card key={card.question}>
+    <Styled.Card data-identifier="flashcard" key={card.question}>
       {renderCard(game, index, updateGame, card)}
     </Styled.Card>
   );

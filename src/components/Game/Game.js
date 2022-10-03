@@ -27,6 +27,7 @@ function reducer(game, { type, payload }) {
   switch (type) {
     case 'START_GAME':
       payload.preventDefault();
+      console.log('poop');
       if (game.deck === '' || !checkInput(game.goal))
         return { ...game };
       return {
@@ -64,12 +65,15 @@ function renderSelect(game, updateGame, decks) {
       <Styled.List
         name='decks'
         value={game.deck}
-        onChange={(e) => updateGame({ type: 'SELECT_DECK', payload: e.target.value })}>
+        onChange={(e) => updateGame({ type: 'SELECT_DECK', payload: e.target.value })}
+        data-identifier="deck-selector">
         <Styled.Option value='' defaultValue=''>Escolha seu deck</Styled.Option>
         {
           decks.map(deck => {
             return (
-              <Styled.Option value={deck.name} key={deck.name}>
+              <Styled.Option value={deck.name}
+                key={deck.name}
+                data-identifier="deck-option">
                 {deck.name}
               </Styled.Option>
             );
@@ -87,8 +91,23 @@ function renderInput(game, updateGame) {
         placeholder='Digite sua meta de zaps...'
         type='text'
         value={game.goal}
+        data-identifier="goals-input"
         onChange={(e) => updateGame({ type: 'GOAL_KEYSTROKE', payload: e.target.value })} />
     </Styled.Label>
+  );
+}
+
+function renderForm(game, updateGame, decks) {
+  return (
+    <Styled.Form onSubmit={(e) => updateGame({ type: 'START_GAME', payload: e })}>
+      {renderSelect(game, updateGame, decks)}
+      {renderInput(game, updateGame)}
+      <Styled.Button type='submit'
+        active={game.deck === '' || !checkInput(game.goal)}
+        value='Iniciar Recall!'
+        data-identifier="start-btn"
+      />
+    </Styled.Form>
   );
 }
 
@@ -100,16 +119,12 @@ export default function Game() {
       <Header status={game.status} />
       <Cards decks={decks} game={game} updateGame={updateGame} />
       <Footer game={game} decks={decks} />
-      <Styled.Container visible={game.status === 'initial'}>
-        <Styled.Form onSubmit={(e) => updateGame({ type: 'START_GAME', payload: e })}>
-          {renderSelect(game, updateGame, decks)}
-          {renderInput(game, updateGame)}
-          <Styled.Button type='submit'
-            active={game.deck === '' || !checkInput(game.goal)}
-            value='Iniciar Recall!'
-          />
-        </Styled.Form>
-      </Styled.Container>
+      {
+        !(game.status === 'initial') ? null :
+          <Styled.Container>
+            {renderForm(game, updateGame, decks)}
+          </Styled.Container>
+      }
     </Styled.Main>
   );
 }

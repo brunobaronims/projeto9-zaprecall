@@ -7,17 +7,14 @@ export const Main = styled.main`
   justify-content: center;
 `;
 
-export const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  visibility: ${props => props.visible ? 'visible' : 'hidden'};
-  opacity: ${props => props.visible ? '1' : '0'};
-  transition: visibility 1s, opacity 1s, linear;
-`;
-
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+`;
+
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 export const Button = styled.input`
