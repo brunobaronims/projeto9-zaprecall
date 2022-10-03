@@ -37,39 +37,39 @@
         ]
     },
     {   
-        "name": "test",
+        "name": "Witcher",
         "cards": [
             {
-                "question": "O que é JSXaaaaa?",
-                "answer": "Uma extensão de linguagem do JavaScript"
+                "question": "Qual o nome do pai de Cirilla Fiona Elen Riannon?",
+                "answer": "Emhyr var Emreis"
             },
             {
-                "question":"O React é __aaaaa",
-                "answer":"uma biblioteca JavaScript para construção de interfaces"
+                "question":"Quem se tornou rei após a morte de Vizimir II?",
+                "answer":"Radovid V"
             },
             {
-                "question":"Componentes devem iniciar com __aaaa",
-                "answer":"letra maiúscula"
+                "question":"Como se denominam os habitantes de Tir ná Lia?",
+                "answer":"Aen Elle"
             },
             {
-                "question":"Podemos colocar __ dentro do JSX",
-                "answer":"expressões"
+                "question":"Qual o maior inimigo dos Aen Elle em seu continente natal?",
+                "answer":"Unicórnios"
             },
             {
-                "question":"O ReactDOM nos ajuda __",
-                "answer":"interagindo com a DOM para colocar componentes React na mesma"
+                "question":"A qual escola Geralt pertence?",
+                "answer":"Escola do Lobo"
             },
             {
-                "question":"Usamos o npm para __",
-                "answer":"gerenciar os pacotes necessários e suas dependências"
+                "question":"Qual o motivo de Geralt odiar portais?",
+                "answer":"Eles são perigosos e o fazem passar mal"
             },
             {
-                "question":"Usamos props para __",
-                "answer":"passar diferentes informações para componentes"
+                "question":"Porque Yennefer se aliou a Emhyr?",
+                "answer":"Para encontrar Ciri"
             },
             {
-                "question":"Usamos estado (state) para __",
-                "answer":"dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"
+                "question":"Quem, afinal, era a Besta de Beauclair?",
+                "answer":"Detlaff"
             }
         ]
     }
