@@ -1,10 +1,15 @@
 import styled from "styled-components";
 
 export const List = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Card = styled.li`
   display: flex;
+  width: fit-content;
+  justify-content: center;
   flex-direction: column;
 `;
 
@@ -21,21 +26,31 @@ export const PlayIcon = styled.img`
 `;
 
 export const Button = styled.button`
+  height: 2rem;
+  width: 4rem;
+  border-radius: 0.2rem;
+  color: #FFF;
+  font: 300 0.6rem 'Recursive', sans-serif;
+
   background-color: ${({ type }) => {
     switch (type) {
       case 'ZAP':
-        return 'green';
+        return '#2FBE34';
       case 'WRONG':
-        return 'red';
+        return '#FF3030';
       default:
-        return 'yellow';
+        return '#FF922E';
     }
   }
   };
 `;
 
 export const FlipButton = styled.button`
-  width: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 30px;
 `;
 
 export const FlipIcon = styled.img`
@@ -50,15 +65,15 @@ export const InactiveCard = styled.div`
   display: flex;
   width: 15rem;
   justify-content: space-between;
-  background-color: rgb(245,245,245);
+  background-color: #FFF;
   color: ${({ type }) => {
     switch (type) {
       case 'zap':
-        return 'green';
+        return '#2FBE34';
       case 'wrong':
-        return 'red';
+        return '#FF3030';
       case 'almost':
-        return 'yellow';
+        return '#FF922E';
       default:
         return 'rgb(10,10,10)';
     }
@@ -67,7 +82,7 @@ export const InactiveCard = styled.div`
     switch (type) {
       case 'wrong':
         return 'line-through';
-      default: 
+      default:
         return 'none';
     }
   }};
@@ -80,5 +95,10 @@ export const ActiveCard = styled.div`
   align-items: space-between;
   height: 6rem;
   width: 15rem;
-  background-color: rgb(250,250,200);
+  background-color: #FFFFD4;
+`;
+
+export const Container = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;

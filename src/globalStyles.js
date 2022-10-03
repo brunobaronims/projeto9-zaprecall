@@ -10,8 +10,13 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     background: #FB6B6B;
+    font-family: 'Recursive', sans-serif;
   }
 
   ol, ul {

@@ -2,7 +2,7 @@ import * as Styled from './index';
 import Header from "../Header/Header";
 import Cards from "../Cards/Cards";
 import Footer from '../Footer/Footer';
-import { useReducer, Fragment } from "react";
+import { useReducer } from "react";
 
 const initialState = { status: 'initial', goal: '', deck: '' };
 const decks = require('../../assets/decks/decks.json');
@@ -96,7 +96,7 @@ export default function Game() {
   const [game, updateGame] = useReducer(reducer, initialState);
 
   return (
-    <Fragment>
+    <Styled.Main>
       <Header status={game.status} />
       <Cards decks={decks} game={game} updateGame={updateGame} />
       <Footer game={game} decks={decks} />
@@ -105,10 +105,11 @@ export default function Game() {
           {renderSelect(game, updateGame, decks)}
           {renderInput(game, updateGame)}
           <Styled.Button type='submit'
+            active={game.deck === '' || !checkInput(game.goal)}
             value='Iniciar Recall!'
           />
         </Styled.Form>
       </Styled.Container>
-    </Fragment>
+    </Styled.Main>
   );
 }

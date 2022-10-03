@@ -31,9 +31,11 @@ function activeCard(card, updateGame) {
   return (
     <Styled.ActiveCard>
       {card.question}
-      <Styled.FlipButton onClick={() => { updateGame({ type: 'FLIP_CARD' }) }}>
-        <Styled.FlipIcon src={flip_icon} />
-      </Styled.FlipButton>
+      <Styled.Container>
+        <Styled.FlipButton onClick={() => { updateGame({ type: 'FLIP_CARD' }) }}>
+          <Styled.FlipIcon src={flip_icon} />
+        </Styled.FlipButton>
+      </Styled.Container>
     </Styled.ActiveCard>
   );
 }
