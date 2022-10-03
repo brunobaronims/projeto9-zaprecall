@@ -5,6 +5,14 @@ export const Main = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  margin-top: 6rem;
+  margin-bottom: 3rem;
+
+  @media (max-width: 600px) {
+    height: initial;
+    justify-content: initial;
+  }
 `;
 
 export const Form = styled.form`

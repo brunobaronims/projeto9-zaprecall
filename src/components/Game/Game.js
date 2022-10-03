@@ -115,7 +115,7 @@ export default function Game() {
   const [game, updateGame] = useReducer(reducer, initialState);
 
   return (
-    <Styled.Main>
+    <Styled.Main active={!(game.status === 'initial')}>
       <Header status={game.status} />
       <Cards decks={decks} game={game} updateGame={updateGame} />
       <Footer game={game} decks={decks} />

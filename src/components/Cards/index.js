@@ -4,25 +4,29 @@ export const List = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: fit-content;
 `;
 
 export const Card = styled.li`
   display: flex;
-  width: fit-content;
-  justify-content: center;
   flex-direction: column;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0.15rem 0.1rem rgba(100,100,100, 0.4));
 `;
 
 export const Buttons = styled.div`
   display: flex;
+  margin-top: 1.6rem;
+  justify-content: space-between;
 `;
 
 export const PlayButton = styled.button`
-  
+  height: 1rem;
 `;
 
 export const PlayIcon = styled.img`
-
+  width: auto;
+  height: 1rem;
 `;
 
 export const Button = styled.button`
@@ -49,12 +53,14 @@ export const FlipButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20px;
-  height: 30px;
+  height: 1.3rem;
+  width: fit-content;
 `;
 
 export const FlipIcon = styled.img`
   rotate: 90deg;
+  height: auto;
+  width: 1.3rem;
 `;
 
 export const CardIcon = styled.img`
@@ -62,10 +68,14 @@ export const CardIcon = styled.img`
 `;
 
 export const InactiveCard = styled.div`
+  border-radius: 0.25rem;
   display: flex;
   width: 15rem;
+  padding: 1rem 0.6rem;
   justify-content: space-between;
+  align-items: center;
   background-color: #FFF;
+  font: 700 0.9rem 'Recursive', sans-serif;
   color: ${({ type }) => {
     switch (type) {
       case 'zap':
@@ -93,9 +103,11 @@ export const ActiveCard = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: space-between;
-  height: 6rem;
+  min-height: 6rem;
   width: 15rem;
   background-color: #FFFFD4;
+  padding: 0.8rem 0.5rem 0.5rem 0.7rem;
+  border-radius: 0.25rem;
 `;
 
 export const Container = styled.div`
