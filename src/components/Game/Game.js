@@ -27,7 +27,6 @@ function reducer(game, { type, payload }) {
   switch (type) {
     case 'START_GAME':
       payload.preventDefault();
-      console.log('poop');
       if (game.deck === '' || !checkInput(game.goal))
         return { ...game };
       return {

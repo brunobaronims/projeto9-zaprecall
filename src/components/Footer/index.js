@@ -10,6 +10,7 @@ export const Container = styled.footer`
   width: 100%;
   min-height: 3rem;
   background-color: #FFF;
+  padding: 1rem;
 `;
 
 export const Text = styled.p`

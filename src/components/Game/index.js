@@ -1,28 +1,22 @@
 import styled from "styled-components";
 
 export const Main = styled.main`
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin-top: 6rem;
-  margin-bottom: 3rem;
-
-  @media (max-width: 600px) {
-    height: initial;
-    justify-content: initial;
-  }
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
 `;
 
 export const Container = styled.div`
   display: flex;
   justify-content: center;
+  height: 8rem;
 `;
 
 export const Button = styled.input`

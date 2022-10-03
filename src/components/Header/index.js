@@ -11,6 +11,7 @@ export const Container = styled.div`
   height: fit-content;
   min-height: 6rem;
   position: ${props => props.status ? 'static' : 'fixed'};
+  margin-top: ${props => props.status ? '6rem' : '0'};
   top: 0;
   z-index: 1;
   background: #FB6B6B;
