@@ -3,7 +3,8 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
   html,
   body,
-  ol, ul {
+  ol, ul,
+  button {
     margin: 0;
     padding: 0;
   }
@@ -14,5 +15,10 @@ export const GlobalStyle = createGlobalStyle`
 
   ol, ul {
     list-style: none;
+  }
+
+  button {
+    background-color: inherit;
+    border: none;
   }
 `;

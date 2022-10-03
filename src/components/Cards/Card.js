@@ -1,47 +1,60 @@
-import { Fragment } from 'react';
 import * as Styled from './index'
+import { zap_icon, almost_icon, wrong_icon, play_icon, flip_icon } from '../../assets/index'
 
 const buttons = [{ text: 'Não lembrei', type: 'RED_BUTTON' },
 { text: 'Quase não lembrei', type: 'YELLOW_BUTTON' }, { text: 'Zap!', type: 'GREEN_BUTTON' }];
 
-function checkAnswer () {
-  return;
+function getAnswerIcon (index, game) {
+  if (game.zap.includes(index))
+    return zap_icon;
+  if (game.almost.includes(index))
+    return almost_icon;
+  return wrong_icon;
 };
+
+function checkAnswer (index, game) {
+  if (game.zap.includes(index))
+    return 'zap';
+  if (game.almost.includes(index))
+    return 'almost';
+  if (game.wrong.includes(index))
+    return 'wrong';
+  return 'initial';
+}
 
 function renderCard(game, index, updateGame, card) {
   if (game.activeCard !== index)
     return (
-      <Fragment>
+      <Styled.InactiveCard type={checkAnswer(index, game)}>
         Pergunta {index + 1}
         {
-          (game.answered.includes(index)) ? <Styled.cardIcon /> :
-            <Styled.playButton onClick={() => { updateGame({ type: 'CHOOSE_CARD', payload: index }) }}
+          (game.answered.includes(index)) ? <Styled.CardIcon src={getAnswerIcon(index, game)}/> :
+            <Styled.PlayButton onClick={() => { updateGame({ type: 'CHOOSE_CARD', payload: index }) }}
               type='button'>
-              test
-            </Styled.playButton>
+              <Styled.PlayIcon src={play_icon}/>
+            </Styled.PlayButton>
         }
-      </Fragment>
+      </Styled.InactiveCard>
     );
   switch (game.flipped) {
     case 'false':
       return (
-        <Fragment>
+        <Styled.ActiveCard>
           {card.question}
-          <Styled.flipButton onClick={() => { updateGame({ type: 'FLIP_CARD' }) }}>
-            test
-          </Styled.flipButton>
-        </Fragment>
+          <Styled.FlipButton onClick={() => { updateGame({ type: 'FLIP_CARD' }) }}>
+            <Styled.FlipIcon src={flip_icon} />
+          </Styled.FlipButton>
+        </Styled.ActiveCard>
       );
     case 'true':
       return (
-        <Fragment>
+        <Styled.ActiveCard>
           {card.answer}
           <Styled.Buttons>
             {
               buttons.map(button => {
                 return (
                   <Styled.Button key={button.text}
-                    text={button.text}
                     type={button.type}
                     onClick={() => { updateGame({ type: button.type, payload: [index] }) }}>
                     {button.text}
@@ -50,7 +63,7 @@ function renderCard(game, index, updateGame, card) {
               })
             }
           </Styled.Buttons>
-        </Fragment>
+        </Styled.ActiveCard>
       )
     default:
       throw new Error();

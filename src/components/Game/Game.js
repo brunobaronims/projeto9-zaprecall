@@ -1,8 +1,7 @@
-import { Fragment, useEffect, useState } from "react";
 import * as Styled from './index';
 import Header from "../Header/Header";
 import Cards from "../Cards/Cards";
-import { useReducer } from "react";
+import { useReducer, Fragment, useEffect } from "react";
 
 const initialState = { status: 'initial', goal: '', deck: '' };
 const decks = require('../../assets/decks/decks.json');
@@ -15,7 +14,7 @@ function reducer(game, { type, payload }) {
         return { ...game };
       return {
         ...game, status: 'active', activeCard: 'none',
-        zap: [], almost: [], forgot: [], answered: []
+        zap: [], almost: [], wrong: [], answered: []
       };
     case 'GOAL_KEYSTROKE':
       return { ...game, goal: payload };
@@ -28,7 +27,7 @@ function reducer(game, { type, payload }) {
     case 'RED_BUTTON':
       return {
         ...game, activeCard: 'none', flipped: 'false',
-        forgot: game.forgot.concat(payload),
+        wrong: game.wrong.concat(payload),
         answered: game.answered.concat(payload)
       }
     case 'YELLOW_BUTTON':
