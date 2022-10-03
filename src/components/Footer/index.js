@@ -15,7 +15,17 @@ export const Container = styled.footer`
 
 export const Text = styled.p`
   white-space: pre;
-  color: #333333;
+  color: ${({win}) => {
+    switch (win) {
+      case 'true':
+        return '#2FBE34'
+      case 'false':
+        return '#FF3030'
+      default:
+        return '#000'
+    }
+  }};
+  margin-bottom: 0.25rem;
 `;
 
 export const Icons = styled.div`

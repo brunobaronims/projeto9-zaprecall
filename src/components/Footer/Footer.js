@@ -19,13 +19,13 @@ function renderText(game, activeDeck) {
     );
   if (game.zap.length >= Number(game.goal))
     return (
-      <Styled.Text type='win'>
+      <Styled.Text win='true'>
         Parabéns!
       </Styled.Text>
     );
   return (
-    <Styled.Text type='loss'>
-      Putz...
+    <Styled.Text win='false'>
+      Puts...
     </Styled.Text>
   );
 }
