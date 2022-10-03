@@ -1,10 +1,57 @@
 import * as Styled from './index';
 import Header from "../Header/Header";
 import Cards from "../Cards/Cards";
-import { useReducer, Fragment, useEffect } from "react";
+import Footer from '../Footer/Footer';
+import { useReducer, Fragment } from "react";
 
 const initialState = { status: 'initial', goal: '', deck: '' };
 const decks = require('../../assets/decks/decks.json');
+
+function answerClick(type, game, cardNumber, payload) {
+  switch (type) {
+    case 'RED_BUTTON':
+      if (game.answered === cardNumber)
+        return {
+          ...game, activeCard: 'none', flipped: 'false',
+          wrong: game.wrong.concat(payload),
+          answered: game.answered.concat(payload),
+          finished: 1
+        };
+      return {
+        ...game, activeCard: 'none', flipped: 'false',
+        wrong: game.wrong.concat(payload),
+        answered: game.answered.concat(payload)
+      };
+    case 'YELLOW_BUTTON':
+      if (game.answered === cardNumber)
+        return {
+          ...game, activeCard: 'none', flipped: 'false',
+          almost: game.almost.concat(payload),
+          answered: game.answered.concat(payload),
+          finished: 1
+        };
+      return {
+        ...game, activeCard: 'none', flipped: 'false',
+        almost: game.almost.concat(payload),
+        answered: game.answered.concat(payload)
+      };
+    case 'GREEN_BUTTON':
+      if (game.answered === cardNumber)
+        return {
+          ...game, activeCard: 'none', flipped: 'false',
+          zap: game.zap.concat(payload),
+          answered: game.answered.concat(payload),
+          finished: 1
+        };
+      return {
+        ...game, activeCard: 'none', flipped: 'false',
+        zap: game.zap.concat(payload),
+        answered: game.answered.concat(payload)
+      };
+    default: 
+      throw new Error();
+  }
+}
 
 function reducer(game, { type, payload }) {
   switch (type) {
@@ -19,6 +66,7 @@ function reducer(game, { type, payload }) {
     case 'GOAL_KEYSTROKE':
       return { ...game, goal: payload };
     case 'SELECT_DECK':
+      console.log(payload);
       return { ...game, deck: payload };
     case 'CHOOSE_CARD':
       return { ...game, activeCard: payload, flipped: 'false' };
@@ -56,14 +104,11 @@ function checkInput(input) {
 export default function Game() {
   const [game, updateGame] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    console.log(game);
-  })
-
   return (
     <Fragment>
       <Header status={game.status} />
       <Cards decks={decks} game={game} updateGame={updateGame} />
+      <Footer game={game} decks={decks} />
       <Styled.Container visible={game.status === 'initial'}>
         <Styled.Form onSubmit={(e) => updateGame({ type: 'START_GAME', payload: e })}>
           <Styled.Label>

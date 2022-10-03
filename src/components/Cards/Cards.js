@@ -11,7 +11,6 @@ export default function Cards({ decks, game, updateGame }) {
           if (deck.name === game.deck) {
             return (
               deck.cards.map((card, index) => {
-                console.log(card);
                 return (
                   <Card updateGame={updateGame}
                   game={game}
@@ -21,7 +20,7 @@ export default function Cards({ decks, game, updateGame }) {
                 );
               })
             );
-          }
+          } return null;
         })
       }
     </Styled.List>

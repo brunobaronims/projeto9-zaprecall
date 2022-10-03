@@ -4,7 +4,8 @@ export const GlobalStyle = createGlobalStyle`
   html,
   body,
   ol, ul,
-  button {
+  button,
+  p {
     margin: 0;
     padding: 0;
   }

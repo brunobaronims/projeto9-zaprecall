@@ -4,7 +4,7 @@ import { zap_icon, almost_icon, wrong_icon, play_icon, flip_icon } from '../../a
 const buttons = [{ text: 'Não lembrei', type: 'RED_BUTTON' },
 { text: 'Quase não lembrei', type: 'YELLOW_BUTTON' }, { text: 'Zap!', type: 'GREEN_BUTTON' }];
 
-function getAnswerIcon (index, game) {
+function getAnswerIcon(index, game) {
   if (game.zap.includes(index))
     return zap_icon;
   if (game.almost.includes(index))
@@ -12,7 +12,7 @@ function getAnswerIcon (index, game) {
   return wrong_icon;
 };
 
-function checkAnswer (index, game) {
+function checkAnswer(index, game) {
   if (game.zap.includes(index))
     return 'zap';
   if (game.almost.includes(index))
@@ -28,10 +28,10 @@ function renderCard(game, index, updateGame, card) {
       <Styled.InactiveCard type={checkAnswer(index, game)}>
         Pergunta {index + 1}
         {
-          (game.answered.includes(index)) ? <Styled.CardIcon src={getAnswerIcon(index, game)}/> :
+          (game.answered.includes(index)) ? <Styled.CardIcon src={getAnswerIcon(index, game)} /> :
             <Styled.PlayButton onClick={() => { updateGame({ type: 'CHOOSE_CARD', payload: index }) }}
               type='button'>
-              <Styled.PlayIcon src={play_icon}/>
+              <Styled.PlayIcon src={play_icon} />
             </Styled.PlayButton>
         }
       </Styled.InactiveCard>
