@@ -14,6 +14,7 @@ export default function Cards({ decks, game, updateGame }) {
                 console.log(card);
                 return (
                   <Card updateGame={updateGame}
+                  game={game}
                   card={card}
                   index={index}
                   key={index} />

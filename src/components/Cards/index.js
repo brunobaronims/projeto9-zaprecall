@@ -12,6 +12,18 @@ export const Buttons = styled.div`
   display: flex;
 `;
 
-export const Button = styled.button`
+export const playButton = styled.button`
   
+`;
+
+export const Button = styled.button`
+
+`;
+
+export const flipButton = styled.button`
+
+`;
+
+export const cardIcon = styled.img`
+
 `;
