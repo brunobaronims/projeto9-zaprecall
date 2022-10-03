@@ -2,7 +2,7 @@ import * as Styled from './index';
 import Header from "../Header/Header";
 import Cards from "../Cards/Cards";
 import Footer from '../Footer/Footer';
-import { useReducer, Fragment, useEffect } from "react";
+import { useReducer, Fragment } from "react";
 
 const initialState = { status: 'initial', goal: '', deck: '' };
 const decks = require('../../assets/decks/decks.json');
@@ -58,12 +58,42 @@ function checkInput(input) {
     return input <= 8 && input >= 1
 }
 
+function renderSelect(game, updateGame, decks) {
+  return (
+    <Styled.Label>
+      <Styled.List
+        name='decks'
+        value={game.deck}
+        onChange={(e) => updateGame({ type: 'SELECT_DECK', payload: e.target.value })}>
+        <Styled.Option value='' defaultValue=''>Escolha seu deck</Styled.Option>
+        {
+          decks.map(deck => {
+            return (
+              <Styled.Option value={deck.name} key={deck.name}>
+                {deck.name}
+              </Styled.Option>
+            );
+          })
+        }
+      </Styled.List>
+    </Styled.Label>
+  );
+}
+
+function renderInput(game, updateGame) {
+  return (
+    <Styled.Label>
+      <Styled.Input
+        placeholder='Digite sua meta de zaps...'
+        type='text'
+        value={game.goal}
+        onChange={(e) => updateGame({ type: 'GOAL_KEYSTROKE', payload: e.target.value })} />
+    </Styled.Label>
+  );
+}
+
 export default function Game() {
   const [game, updateGame] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    console.log(game);
-  })
 
   return (
     <Fragment>
@@ -72,30 +102,8 @@ export default function Game() {
       <Footer game={game} decks={decks} />
       <Styled.Container visible={game.status === 'initial'}>
         <Styled.Form onSubmit={(e) => updateGame({ type: 'START_GAME', payload: e })}>
-          <Styled.Label>
-            <Styled.List
-              name='decks'
-              value={game.deck}
-              onChange={(e) => updateGame({ type: 'SELECT_DECK', payload: e.target.value })}>
-              <Styled.Option value='' defaultValue=''>Escolha seu deck</Styled.Option>
-              {
-                decks.map(deck => {
-                  return (
-                    <Styled.Option value={deck.name} key={deck.name}>
-                      {deck.name}
-                    </Styled.Option>
-                  );
-                })
-              }
-            </Styled.List>
-          </Styled.Label>
-          <Styled.Label>
-            <Styled.Input
-              placeholder='Digite sua meta de zaps...'
-              type='text'
-              value={game.goal}
-              onChange={(e) => updateGame({ type: 'GOAL_KEYSTROKE', payload: e.target.value })} />
-          </Styled.Label>
+          {renderSelect(game, updateGame, decks)}
+          {renderInput(game, updateGame)}
           <Styled.Button type='submit'
             value='Iniciar Recall!'
           />

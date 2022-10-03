@@ -12,6 +12,53 @@ function getAnswerIcon(index, game) {
   return wrong_icon;
 };
 
+function inactiveCard(game, index, updateGame) {
+  return (
+    <Styled.InactiveCard type={checkAnswer(index, game)}>
+      Pergunta {index + 1}
+      {
+        (game.answered.includes(index)) ? <Styled.CardIcon src={getAnswerIcon(index, game)} /> :
+          <Styled.PlayButton onClick={() => { updateGame({ type: 'CHOOSE_CARD', payload: index }) }}
+            type='button'>
+            <Styled.PlayIcon src={play_icon} />
+          </Styled.PlayButton>
+      }
+    </Styled.InactiveCard>
+  );
+}
+
+function activeCard(card, updateGame) {
+  return (
+    <Styled.ActiveCard>
+      {card.question}
+      <Styled.FlipButton onClick={() => { updateGame({ type: 'FLIP_CARD' }) }}>
+        <Styled.FlipIcon src={flip_icon} />
+      </Styled.FlipButton>
+    </Styled.ActiveCard>
+  );
+}
+
+function flippedCard(card, updateGame, index) {
+  return (
+    <Styled.ActiveCard>
+      {card.answer}
+      <Styled.Buttons>
+        {
+          buttons.map(button => {
+            return (
+              <Styled.Button key={button.text}
+                type={button.type}
+                onClick={() => { updateGame({ type: button.type, payload: [index] }) }}>
+                {button.text}
+              </Styled.Button>
+            );
+          })
+        }
+      </Styled.Buttons>
+    </Styled.ActiveCard>
+  );
+}
+
 function checkAnswer(index, game) {
   if (game.zap.includes(index))
     return 'zap';
@@ -25,46 +72,17 @@ function checkAnswer(index, game) {
 function renderCard(game, index, updateGame, card) {
   if (game.activeCard !== index)
     return (
-      <Styled.InactiveCard type={checkAnswer(index, game)}>
-        Pergunta {index + 1}
-        {
-          (game.answered.includes(index)) ? <Styled.CardIcon src={getAnswerIcon(index, game)} /> :
-            <Styled.PlayButton onClick={() => { updateGame({ type: 'CHOOSE_CARD', payload: index }) }}
-              type='button'>
-              <Styled.PlayIcon src={play_icon} />
-            </Styled.PlayButton>
-        }
-      </Styled.InactiveCard>
+      inactiveCard(game, index, updateGame)
     );
   switch (game.flipped) {
     case 'false':
       return (
-        <Styled.ActiveCard>
-          {card.question}
-          <Styled.FlipButton onClick={() => { updateGame({ type: 'FLIP_CARD' }) }}>
-            <Styled.FlipIcon src={flip_icon} />
-          </Styled.FlipButton>
-        </Styled.ActiveCard>
+        activeCard(card, updateGame)
       );
     case 'true':
       return (
-        <Styled.ActiveCard>
-          {card.answer}
-          <Styled.Buttons>
-            {
-              buttons.map(button => {
-                return (
-                  <Styled.Button key={button.text}
-                    type={button.type}
-                    onClick={() => { updateGame({ type: button.type, payload: [index] }) }}>
-                    {button.text}
-                  </Styled.Button>
-                );
-              })
-            }
-          </Styled.Buttons>
-        </Styled.ActiveCard>
-      )
+        flippedCard(card, updateGame, index)
+      );
     default:
       throw new Error();
   }
